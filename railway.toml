@@ -1,0 +1,10 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+# First boot creates the site and can take 10–15 minutes.
+# Keep RAILWAY_HEALTHCHECK_TIMEOUT_SEC=900 on the service.
+# Do not set a custom start command. Port must be 80.

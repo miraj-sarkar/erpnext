@@ -1,0 +1,42 @@
+# Railway image for THIS Git repo (ERPNext 17 develop).
+# Overlay our app onto the official Frappe/ERPNext develop image, then run
+# nginx + gunicorn + workers + socketio in one container (Railway: one volume).
+ARG ERPNEXT_BASE=frappe/erpnext:develop
+FROM ${ERPNEXT_BASE}
+
+USER root
+
+RUN apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+		supervisor \
+		gettext-base \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& rm -f /etc/nginx/sites-enabled/default \
+	&& mkdir -p /etc/nginx/conf.d
+
+COPY --chown=frappe:frappe docker/railway/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --chown=root docker/railway/supervisord.conf /home/frappe/supervisor.conf
+COPY --chown=frappe:frappe --chmod=0755 docker/railway/setup.sh /home/frappe/frappe-bench/railway-setup.sh
+COPY --chmod=0755 docker/railway/entrypoint.sh /usr/local/bin/railway-entrypoint.sh
+COPY --chmod=0755 docker/railway/cmd.sh /usr/local/bin/railway-cmd.sh
+
+# Replace the stock ERPNext app with the contents of this Git repo.
+RUN rm -rf /home/frappe/frappe-bench/apps/erpnext
+COPY --chown=frappe:frappe . /home/frappe/frappe-bench/apps/erpnext
+
+USER frappe
+WORKDIR /home/frappe/frappe-bench
+
+RUN echo '{"webserver_port": 8000}' > sites/common_site_config.json \
+	&& ./env/bin/pip install -e apps/erpnext \
+	&& /usr/local/bin/bench build --app erpnext \
+	&& mkdir -p built_sites \
+	&& cp -a sites/assets /home/frappe/frappe-bench/assets \
+	&& cp sites/apps.txt built_sites/apps.txt \
+	&& cp sites/apps.json built_sites/apps.json || true \
+	&& grep -qx erpnext sites/apps.txt || echo erpnext >> sites/apps.txt
+
+USER root
+EXPOSE 80
+ENTRYPOINT ["/usr/local/bin/railway-entrypoint.sh"]
+CMD ["/usr/local/bin/railway-cmd.sh"]
