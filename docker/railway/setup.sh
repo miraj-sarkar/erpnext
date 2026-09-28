@@ -45,19 +45,21 @@ run_bench set-config -g redis_socketio "${FRAPPE_REDIS_QUEUE}"
 
 if [ -f "${SITES_DIR}/${SITE_NAME}/site_config.json" ]; then
 	echo "-> Site ${SITE_NAME} already exists, skipping new-site"
-	exit 0
+else
+	echo "-> Creating site ${SITE_NAME} and installing ERPNext"
+	run_bench new-site "${SITE_NAME}" \
+		--admin-password "${RFP_SITE_ADMIN_PASSWORD}" \
+		--db-host "${FRAPPE_DB_HOST}" \
+		--db-port "${DB_PORT}" \
+		--db-root-username root \
+		--db-root-password "${FRAPPE_DB_PASSWORD}" \
+		--mariadb-user-host-login-scope='%' \
+		--install-app erpnext
+
+	run_bench use "${SITE_NAME}"
+	run_bench --site "${SITE_NAME}" enable-scheduler || true
+	echo "-> Site created"
 fi
 
-echo "-> Creating site ${SITE_NAME} and installing ERPNext"
-run_bench new-site "${SITE_NAME}" \
-	--admin-password "${RFP_SITE_ADMIN_PASSWORD}" \
-	--db-host "${FRAPPE_DB_HOST}" \
-	--db-port "${DB_PORT}" \
-	--db-root-username root \
-	--db-root-password "${FRAPPE_DB_PASSWORD}" \
-	--mariadb-user-host-login-scope='%' \
-	--install-app erpnext
-
-run_bench use "${SITE_NAME}"
-run_bench --site "${SITE_NAME}" enable-scheduler || true
-echo "-> Site created"
+echo "-> Ensuring login user"
+su frappe -s /bin/bash -c "cd /home/frappe/frappe-bench && ./env/bin/python /usr/local/bin/railway-ensure-login.py"

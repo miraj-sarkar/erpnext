@@ -20,6 +20,7 @@ COPY --chown=frappe:frappe --chmod=0755 docker/railway/setup.sh /home/frappe/fra
 COPY --chmod=0755 docker/railway/prepare-sites.sh /usr/local/bin/railway-prepare-sites.sh
 COPY --chmod=0755 docker/railway/entrypoint.sh /usr/local/bin/railway-entrypoint.sh
 COPY --chmod=0755 docker/railway/cmd.sh /usr/local/bin/railway-cmd.sh
+COPY --chmod=0755 docker/railway/ensure_login.py /usr/local/bin/railway-ensure-login.py
 
 # Replace the stock ERPNext app with this Git repo, but keep JS deps from
 # the base image (Git and .dockerignore do not include node_modules).
