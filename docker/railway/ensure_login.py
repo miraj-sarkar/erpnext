@@ -3,8 +3,10 @@
 import os
 import sys
 
-os.chdir("/home/frappe/frappe-bench")
-sys.path.insert(0, "apps/frappe")
+BENCH = "/home/frappe/frappe-bench"
+SITES = os.path.join(BENCH, "sites")
+os.chdir(BENCH)
+sys.path.insert(0, os.path.join(BENCH, "apps/frappe"))
 
 import frappe
 from frappe.utils.password import update_password
@@ -12,8 +14,21 @@ from frappe.utils.password import update_password
 SITE = os.environ.get("SITE_NAME", "frontend")
 EMAIL = os.environ.get("SITE_ADMIN_EMAIL", "nawmi@arcloops.io")
 PASSWORD = os.environ.get("SITE_ADMIN_PASSWORD", "12345678")
+SITE_CONFIG = os.path.join(SITES, SITE, "site_config.json")
 
-frappe.init(site=SITE)
+if not os.path.isfile(SITE_CONFIG):
+	available = sorted(
+		name
+		for name in os.listdir(SITES)
+		if os.path.isfile(os.path.join(SITES, name, "site_config.json"))
+	)
+	if not available:
+		print("-> No site found on volume. Skip login user.")
+		sys.exit(0)
+	SITE = available[0]
+	print(f"-> Site frontend not found, using {SITE}")
+
+frappe.init(site=SITE, sites_path=SITES)
 frappe.connect()
 frappe.set_user("Administrator")
 

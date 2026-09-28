@@ -62,4 +62,5 @@ else
 fi
 
 echo "-> Ensuring login user"
-su frappe -s /bin/bash -c "cd /home/frappe/frappe-bench && ./env/bin/python /usr/local/bin/railway-ensure-login.py"
+export SITE_NAME
+su frappe -s /bin/bash -c "cd /home/frappe/frappe-bench && SITE_NAME='${SITE_NAME}' ./env/bin/python /usr/local/bin/railway-ensure-login.py"
