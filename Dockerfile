@@ -12,7 +12,10 @@ RUN apt-get update \
 		gettext-base \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -f /etc/nginx/sites-enabled/default \
-	&& mkdir -p /etc/nginx/conf.d
+	&& mkdir -p /etc/nginx/conf.d \
+		/home/frappe/frappe-bench/logs \
+		/home/frappe/logs \
+	&& chown -R frappe:frappe /home/frappe/frappe-bench/logs /home/frappe/logs
 
 COPY --chown=frappe:frappe docker/railway/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --chown=root docker/railway/supervisord.conf /home/frappe/supervisor.conf

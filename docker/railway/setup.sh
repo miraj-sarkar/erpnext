@@ -23,6 +23,9 @@ run_bench() {
 	su frappe -s /bin/bash -c "cd /home/frappe/frappe-bench && ${BENCH_BIN} $*"
 }
 
+mkdir -p /home/frappe/frappe-bench/logs /home/frappe/logs "${SITES_DIR}"
+chown -R frappe:frappe /home/frappe/frappe-bench/logs /home/frappe/logs || true
+
 cd /home/frappe/frappe-bench
 
 /usr/local/bin/railway-prepare-sites.sh
@@ -37,30 +40,34 @@ for _ in $(seq 1 90); do
 done
 
 echo "-> Writing common site config"
-run_bench set-config -g db_host "${FRAPPE_DB_HOST}"
-run_bench set-config -g db_port "${DB_PORT}"
-run_bench set-config -g redis_cache "${FRAPPE_REDIS_CACHE}"
-run_bench set-config -g redis_queue "${FRAPPE_REDIS_QUEUE}"
-run_bench set-config -g redis_socketio "${FRAPPE_REDIS_QUEUE}"
+run_bench set-config -g db_host "${FRAPPE_DB_HOST}" || true
+run_bench set-config -g db_port "${DB_PORT}" || true
+run_bench set-config -g redis_cache "${FRAPPE_REDIS_CACHE}" || true
+run_bench set-config -g redis_queue "${FRAPPE_REDIS_QUEUE}" || true
+run_bench set-config -g redis_socketio "${FRAPPE_REDIS_QUEUE}" || true
 
 if [ -f "${SITES_DIR}/${SITE_NAME}/site_config.json" ]; then
 	echo "-> Site ${SITE_NAME} already exists, skipping new-site"
 else
 	echo "-> Creating site ${SITE_NAME} and installing ERPNext"
-	run_bench new-site "${SITE_NAME}" \
+	if run_bench new-site "${SITE_NAME}" \
 		--admin-password "${RFP_SITE_ADMIN_PASSWORD}" \
 		--db-host "${FRAPPE_DB_HOST}" \
 		--db-port "${DB_PORT}" \
 		--db-root-username root \
 		--db-root-password "${FRAPPE_DB_PASSWORD}" \
 		--mariadb-user-host-login-scope='%' \
-		--install-app erpnext
-
-	run_bench use "${SITE_NAME}"
-	run_bench --site "${SITE_NAME}" enable-scheduler || true
-	echo "-> Site created"
+		--install-app erpnext; then
+		run_bench use "${SITE_NAME}" || true
+		run_bench --site "${SITE_NAME}" enable-scheduler || true
+		echo "-> Site created"
+	else
+		echo "-> new-site failed; continuing so the web server can start"
+	fi
 fi
 
 echo "-> Ensuring login user"
 export SITE_NAME
-su frappe -s /bin/bash -c "cd /home/frappe/frappe-bench && SITE_NAME='${SITE_NAME}' ./env/bin/python /usr/local/bin/railway-ensure-login.py"
+export FRAPPE_STREAM_LOGGING=1
+su frappe -s /bin/bash -c "cd /home/frappe/frappe-bench/sites && SITE_NAME='${SITE_NAME}' FRAPPE_STREAM_LOGGING=1 /home/frappe/frappe-bench/env/bin/python /usr/local/bin/railway-ensure-login.py" || echo "-> Login user step skipped"
+echo "-> Setup finished"
