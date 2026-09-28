@@ -21,15 +21,32 @@ COPY --chmod=0755 docker/railway/prepare-sites.sh /usr/local/bin/railway-prepare
 COPY --chmod=0755 docker/railway/entrypoint.sh /usr/local/bin/railway-entrypoint.sh
 COPY --chmod=0755 docker/railway/cmd.sh /usr/local/bin/railway-cmd.sh
 
-# Replace the stock ERPNext app with the contents of this Git repo.
-RUN rm -rf /home/frappe/frappe-bench/apps/erpnext
+# Replace the stock ERPNext app with this Git repo, but keep JS deps from
+# the base image (Git and .dockerignore do not include node_modules).
+RUN if [ -d /home/frappe/frappe-bench/apps/erpnext/node_modules ]; then \
+		mv /home/frappe/frappe-bench/apps/erpnext/node_modules /tmp/erpnext-node_modules; \
+	fi \
+	&& if [ -d /home/frappe/frappe-bench/apps/erpnext/banking/node_modules ]; then \
+		mv /home/frappe/frappe-bench/apps/erpnext/banking/node_modules /tmp/banking-node_modules; \
+	fi \
+	&& rm -rf /home/frappe/frappe-bench/apps/erpnext
 COPY --chown=frappe:frappe . /home/frappe/frappe-bench/apps/erpnext
+RUN if [ -d /tmp/erpnext-node_modules ]; then \
+		mv /tmp/erpnext-node_modules /home/frappe/frappe-bench/apps/erpnext/node_modules \
+		&& chown -R frappe:frappe /home/frappe/frappe-bench/apps/erpnext/node_modules; \
+	fi \
+	&& if [ -d /tmp/banking-node_modules ]; then \
+		mkdir -p /home/frappe/frappe-bench/apps/erpnext/banking \
+		&& mv /tmp/banking-node_modules /home/frappe/frappe-bench/apps/erpnext/banking/node_modules \
+		&& chown -R frappe:frappe /home/frappe/frappe-bench/apps/erpnext/banking/node_modules; \
+	fi
 
 USER frappe
 WORKDIR /home/frappe/frappe-bench
 
 RUN echo '{"webserver_port": 8000}' > sites/common_site_config.json \
 	&& ./env/bin/pip install -e apps/erpnext \
+	&& yarn --cwd apps/erpnext --frozen-lockfile \
 	&& /usr/local/bin/bench build --app erpnext \
 	&& mkdir -p built_sites \
 	&& printf 'frappe\nerpnext\n' > built_sites/apps.txt \
