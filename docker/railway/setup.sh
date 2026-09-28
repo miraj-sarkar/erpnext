@@ -25,6 +25,8 @@ run_bench() {
 
 cd /home/frappe/frappe-bench
 
+/usr/local/bin/railway-prepare-sites.sh
+
 echo "-> Waiting for MariaDB at ${FRAPPE_DB_HOST}:${DB_PORT}"
 for _ in $(seq 1 90); do
 	if mysqladmin ping -h "$FRAPPE_DB_HOST" -P "$DB_PORT" -uroot -p"$FRAPPE_DB_PASSWORD" --silent 2>/dev/null; then

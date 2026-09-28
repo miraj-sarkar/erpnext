@@ -17,6 +17,7 @@ RUN apt-get update \
 COPY --chown=frappe:frappe docker/railway/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --chown=root docker/railway/supervisord.conf /home/frappe/supervisor.conf
 COPY --chown=frappe:frappe --chmod=0755 docker/railway/setup.sh /home/frappe/frappe-bench/railway-setup.sh
+COPY --chmod=0755 docker/railway/prepare-sites.sh /usr/local/bin/railway-prepare-sites.sh
 COPY --chmod=0755 docker/railway/entrypoint.sh /usr/local/bin/railway-entrypoint.sh
 COPY --chmod=0755 docker/railway/cmd.sh /usr/local/bin/railway-cmd.sh
 
@@ -31,10 +32,10 @@ RUN echo '{"webserver_port": 8000}' > sites/common_site_config.json \
 	&& ./env/bin/pip install -e apps/erpnext \
 	&& /usr/local/bin/bench build --app erpnext \
 	&& mkdir -p built_sites \
+	&& printf 'frappe\nerpnext\n' > built_sites/apps.txt \
+	&& printf 'frappe\nerpnext\n' > sites/apps.txt \
 	&& cp -a sites/assets /home/frappe/frappe-bench/assets \
-	&& cp sites/apps.txt built_sites/apps.txt \
-	&& cp sites/apps.json built_sites/apps.json || true \
-	&& grep -qx erpnext sites/apps.txt || echo erpnext >> sites/apps.txt
+	&& if [ -f sites/apps.json ]; then cp sites/apps.json built_sites/apps.json; fi
 
 USER root
 EXPOSE 80
