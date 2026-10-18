@@ -1,0 +1,22 @@
+[
+  {
+    "code": "RX",
+    "name": "Prescription – Third-party",
+    "covers": "Prescriptions paid by PBMs / insurers"
+  },
+  {
+    "code": "POS",
+    "name": "Point of Sale",
+    "covers": "Patient copays, cash customers and front-store (OTC) sales"
+  },
+  {
+    "code": "340B",
+    "name": "340B Program",
+    "covers": "Contract-pharmacy work for a covered entity"
+  },
+  {
+    "code": "ADM",
+    "name": "Admin & Shared",
+    "covers": "Costs that serve the whole pharmacy; allocated at month end"
+  }
+]

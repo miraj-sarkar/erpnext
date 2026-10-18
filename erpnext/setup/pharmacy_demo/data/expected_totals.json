@@ -1,0 +1,98 @@
+{
+  "accounts": [
+    {
+      "code": "1020",
+      "account": "Chase Checking …8862 (Reserve)",
+      "fy2022": -145000.0,
+      "fy2023": -150103.58
+    },
+    {
+      "code": "1030",
+      "account": "Chase Checking …1063",
+      "fy2022": 0.0,
+      "fy2023": 127500.0
+    },
+    {
+      "code": "1040",
+      "account": "Chase Checking …0802 (Legacy)",
+      "fy2022": 127109.22,
+      "fy2023": 0.0
+    },
+    {
+      "code": "2110",
+      "account": "Citi Business Credit Card",
+      "fy2022": -148365.23,
+      "fy2023": -177352.28
+    },
+    {
+      "code": "2130",
+      "account": "Chase Ink Card …2383",
+      "fy2022": -115616.53,
+      "fy2023": -45419.03
+    },
+    {
+      "code": "2210",
+      "account": "Payroll Clearing (ADP)",
+      "fy2022": 0.0,
+      "fy2023": -412542.49
+    },
+    {
+      "code": "2900",
+      "account": "Suspense – Awaiting Client Support",
+      "fy2022": -462958.4,
+      "fy2023": -50632.79
+    },
+    {
+      "code": "4010",
+      "account": "Prescription Revenue – Third-party Payers",
+      "fy2022": 929859.46,
+      "fy2023": 1153609.89
+    },
+    {
+      "code": "4020",
+      "account": "Point-of-Sale Revenue – Copays & Front Store",
+      "fy2022": 23885.87,
+      "fy2023": 22227.89
+    },
+    {
+      "code": "4040",
+      "account": "340B Program Revenue",
+      "fy2022": 1569.91,
+      "fy2023": 1569.91
+    },
+    {
+      "code": "4090",
+      "account": "Refunds & Chargebacks",
+      "fy2022": -109.72,
+      "fy2023": -62.94
+    },
+    {
+      "code": "5010",
+      "account": "Cost of Goods Sold – Prescription Drugs",
+      "fy2022": -223559.81,
+      "fy2023": -514600.73
+    },
+    {
+      "code": "6030",
+      "account": "Payroll Processing Fees",
+      "fy2022": 0.0,
+      "fy2023": -1921.3
+    },
+    {
+      "code": "6610",
+      "account": "Bank Service Charges",
+      "fy2022": -50.0,
+      "fy2023": -600.0
+    },
+    {
+      "code": "6620",
+      "account": "Wire & Returned Item Fees",
+      "fy2022": -267.0,
+      "fy2023": 0.0
+    }
+  ],
+  "bank_movement": {
+    "fy2022": -13502.23,
+    "fy2023": -48327.45
+  }
+}

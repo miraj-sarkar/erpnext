@@ -1,0 +1,272 @@
+[
+  {
+    "statement": "2021-07",
+    "period_start": "2019-11-07",
+    "period_end": "2021-07-30",
+    "opening": 0.0,
+    "money_in": 360041.96,
+    "money_out": 149.7,
+    "statement_closing": 359892.26
+  },
+  {
+    "statement": "2021-08",
+    "period_start": "2021-07-31",
+    "period_end": "2021-08-31",
+    "opening": 359892.26,
+    "money_in": 144824.75,
+    "money_out": 88621.39,
+    "statement_closing": 416095.62
+  },
+  {
+    "statement": "2021-09",
+    "period_start": "2021-09-01",
+    "period_end": "2021-09-30",
+    "opening": 416095.62,
+    "money_in": 82791.51,
+    "money_out": 389968.08,
+    "statement_closing": 108919.05
+  },
+  {
+    "statement": "2021-10",
+    "period_start": "2021-10-01",
+    "period_end": "2021-10-29",
+    "opening": 108919.05,
+    "money_in": 119228.15,
+    "money_out": 65647.56,
+    "statement_closing": 162499.64
+  },
+  {
+    "statement": "2021-11",
+    "period_start": "2021-10-30",
+    "period_end": "2021-11-30",
+    "opening": 162499.64,
+    "money_in": 154996.2,
+    "money_out": 90302.27,
+    "statement_closing": 227193.57
+  },
+  {
+    "statement": "2021-12",
+    "period_start": "2021-12-01",
+    "period_end": "2021-12-31",
+    "opening": 227193.57,
+    "money_in": 1945.16,
+    "money_out": 80217.09,
+    "statement_closing": 148921.64
+  },
+  {
+    "statement": "2022-01",
+    "period_start": "2022-01-01",
+    "period_end": "2022-01-31",
+    "opening": 148921.64,
+    "money_in": 128656.47,
+    "money_out": 141746.0,
+    "statement_closing": 135832.11
+  },
+  {
+    "statement": "2022-02",
+    "period_start": "2022-02-01",
+    "period_end": "2022-02-28",
+    "opening": 135832.11,
+    "money_in": 73173.21,
+    "money_out": 44400.24,
+    "statement_closing": 164605.08
+  },
+  {
+    "statement": "2022-03",
+    "period_start": "2022-03-01",
+    "period_end": "2022-03-31",
+    "opening": 164605.08,
+    "money_in": 62775.05,
+    "money_out": 62565.06,
+    "statement_closing": 164815.07
+  },
+  {
+    "statement": "2022-04",
+    "period_start": "2022-04-01",
+    "period_end": "2022-04-29",
+    "opening": 164815.07,
+    "money_in": 198812.85,
+    "money_out": 242825.68,
+    "statement_closing": 120802.24
+  },
+  {
+    "statement": "2022-05",
+    "period_start": "2022-04-30",
+    "period_end": "2022-05-31",
+    "opening": 120802.24,
+    "money_in": 102854.49,
+    "money_out": 19377.85,
+    "statement_closing": 204278.88
+  },
+  {
+    "statement": "2022-06",
+    "period_start": "2022-06-01",
+    "period_end": "2022-06-30",
+    "opening": 204278.88,
+    "money_in": 102743.67,
+    "money_out": 151336.35,
+    "statement_closing": 155686.2
+  },
+  {
+    "statement": "2022-07",
+    "period_start": "2022-07-01",
+    "period_end": "2022-07-29",
+    "opening": 155686.2,
+    "money_in": 83037.11,
+    "money_out": 87660.53,
+    "statement_closing": 151062.78
+  },
+  {
+    "statement": "2022-08",
+    "period_start": "2022-07-30",
+    "period_end": "2022-08-31",
+    "opening": 151062.78,
+    "money_in": 72361.74,
+    "money_out": 122744.88,
+    "statement_closing": 100679.64
+  },
+  {
+    "statement": "2022-09",
+    "period_start": "2022-09-01",
+    "period_end": "2022-09-30",
+    "opening": 100679.64,
+    "money_in": 40617.79,
+    "money_out": 101396.16,
+    "statement_closing": 39901.27
+  },
+  {
+    "statement": "2022-10",
+    "period_start": "2022-10-01",
+    "period_end": "2022-10-31",
+    "opening": 39901.27,
+    "money_in": 33667.95,
+    "money_out": 34462.96,
+    "statement_closing": 39106.26
+  },
+  {
+    "statement": "2022-11",
+    "period_start": "2022-11-01",
+    "period_end": "2022-11-30",
+    "opening": 39106.26,
+    "money_in": 45830.87,
+    "money_out": 30736.9,
+    "statement_closing": 54200.23
+  },
+  {
+    "statement": "2022-12",
+    "period_start": "2022-12-01",
+    "period_end": "2022-12-30",
+    "opening": 54200.23,
+    "money_in": 232158.95,
+    "money_out": 150939.77,
+    "statement_closing": 135419.41
+  },
+  {
+    "statement": "2023-01",
+    "period_start": "2022-12-31",
+    "period_end": "2023-01-31",
+    "opening": 135419.41,
+    "money_in": 184043.55,
+    "money_out": 166826.3,
+    "statement_closing": 152636.66
+  },
+  {
+    "statement": "2023-02",
+    "period_start": "2023-02-01",
+    "period_end": "2023-02-28",
+    "opening": 152636.66,
+    "money_in": 35068.99,
+    "money_out": 136823.11,
+    "statement_closing": 50882.54
+  },
+  {
+    "statement": "2023-03",
+    "period_start": "2023-03-01",
+    "period_end": "2023-03-31",
+    "opening": 50882.54,
+    "money_in": 146154.12,
+    "money_out": 102582.11,
+    "statement_closing": 94454.55
+  },
+  {
+    "statement": "2023-04",
+    "period_start": "2023-04-01",
+    "period_end": "2023-04-28",
+    "opening": 94454.55,
+    "money_in": 152316.74,
+    "money_out": 115777.93,
+    "statement_closing": 130993.36
+  },
+  {
+    "statement": "2023-05",
+    "period_start": "2023-04-29",
+    "period_end": "2023-05-31",
+    "opening": 130993.36,
+    "money_in": 115933.84,
+    "money_out": 84757.44,
+    "statement_closing": 162169.76
+  },
+  {
+    "statement": "2023-06",
+    "period_start": "2023-06-01",
+    "period_end": "2023-06-30",
+    "opening": 162169.76,
+    "money_in": 100553.66,
+    "money_out": 175778.66,
+    "statement_closing": 86944.76
+  },
+  {
+    "statement": "2023-07",
+    "period_start": "2023-07-01",
+    "period_end": "2023-07-31",
+    "opening": 86944.76,
+    "money_in": 94055.76,
+    "money_out": 93387.44,
+    "statement_closing": 87613.08
+  },
+  {
+    "statement": "2023-08",
+    "period_start": "2023-08-01",
+    "period_end": "2023-08-31",
+    "opening": 87613.08,
+    "money_in": 62357.84,
+    "money_out": 97757.06,
+    "statement_closing": 52213.86
+  },
+  {
+    "statement": "2023-09",
+    "period_start": "2023-09-01",
+    "period_end": "2023-09-29",
+    "opening": 52213.86,
+    "money_in": 98398.94,
+    "money_out": 117475.67,
+    "statement_closing": 33137.13
+  },
+  {
+    "statement": "2023-10",
+    "period_start": "2023-09-30",
+    "period_end": "2023-10-31",
+    "opening": 33137.13,
+    "money_in": 131021.8,
+    "money_out": 77684.57,
+    "statement_closing": 86474.36
+  },
+  {
+    "statement": "2023-11",
+    "period_start": "2023-11-01",
+    "period_end": "2023-11-30",
+    "opening": 86474.36,
+    "money_in": 106113.86,
+    "money_out": 130995.11,
+    "statement_closing": 61593.11
+  },
+  {
+    "statement": "2023-12",
+    "period_start": "2023-12-01",
+    "period_end": "2023-12-29",
+    "opening": 61593.11,
+    "money_in": 78988.59,
+    "money_out": 53489.74,
+    "statement_closing": 87091.96
+  }
+]

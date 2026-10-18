@@ -1,0 +1,642 @@
+[
+  {
+    "code": "1010",
+    "name": "Chase Business Checking …8905 (Operating)",
+    "statement_type": "Bank",
+    "root_type": "Asset",
+    "group": "Bank Accounts",
+    "account_type": "Bank",
+    "cost_centre": false,
+    "notes": "Main operating account. Statements provided. Reconcile monthly."
+  },
+  {
+    "code": "1020",
+    "name": "Chase Checking …8862 (Reserve)",
+    "statement_type": "Bank",
+    "root_type": "Asset",
+    "group": "Bank Accounts",
+    "account_type": "Bank",
+    "cost_centre": false,
+    "notes": "Receives surplus cash from operating. Statements not in pack; request from client."
+  },
+  {
+    "code": "1030",
+    "name": "Chase Checking …1063",
+    "statement_type": "Bank",
+    "root_type": "Asset",
+    "group": "Bank Accounts",
+    "account_type": "Bank",
+    "cost_centre": false,
+    "notes": "Funds operating account in late 2023. Statements not in pack; request from client."
+  },
+  {
+    "code": "1040",
+    "name": "Chase Checking …0802 (Legacy)",
+    "statement_type": "Bank",
+    "root_type": "Asset",
+    "group": "Bank Accounts",
+    "account_type": "Bank",
+    "cost_centre": false,
+    "notes": "Legacy account swept into operating Jan 2022. Statements not in pack."
+  },
+  {
+    "code": "1050",
+    "name": "Cash on Hand / Undeposited Cash",
+    "statement_type": "Current Asset",
+    "root_type": "Asset",
+    "group": "Current Assets",
+    "account_type": "Cash",
+    "cost_centre": false,
+    "notes": "Till cash before it is banked at the ATM."
+  },
+  {
+    "code": "1090",
+    "name": "Inter-account Transfers Clearing",
+    "statement_type": "Current Asset",
+    "root_type": "Asset",
+    "group": "Current Assets",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Must be zero at every month end."
+  },
+  {
+    "code": "1110",
+    "name": "Accounts Receivable – Third-party Payers",
+    "statement_type": "Current Asset",
+    "root_type": "Asset",
+    "group": "Current Assets",
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Year-end accrual only (PBM / insurance claims not yet paid)."
+  },
+  {
+    "code": "1120",
+    "name": "Accounts Receivable – 340B Program",
+    "statement_type": "Current Asset",
+    "root_type": "Asset",
+    "group": "Current Assets",
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Year-end accrual only."
+  },
+  {
+    "code": "1130",
+    "name": "Returned Items Receivable",
+    "statement_type": "Current Asset",
+    "root_type": "Asset",
+    "group": "Current Assets",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Bounced customer cheques being chased."
+  },
+  {
+    "code": "1210",
+    "name": "Inventory – Prescription Drugs",
+    "statement_type": "Inventory",
+    "root_type": "Asset",
+    "group": "Inventory",
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Adjusted to physical count at year end."
+  },
+  {
+    "code": "1220",
+    "name": "Inventory – Front Store / OTC",
+    "statement_type": "Inventory",
+    "root_type": "Asset",
+    "group": "Inventory",
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Adjusted to physical count at year end."
+  },
+  {
+    "code": "1310",
+    "name": "Prepaid Expenses",
+    "statement_type": "Current Asset",
+    "root_type": "Asset",
+    "group": "Current Assets",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Insurance, licences paid in advance."
+  },
+  {
+    "code": "1320",
+    "name": "Security Deposits",
+    "statement_type": "Non-current Asset",
+    "root_type": "Asset",
+    "group": "Non-current Assets",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Lease deposit."
+  },
+  {
+    "code": "1510",
+    "name": "Furniture, Fixtures & Equipment",
+    "statement_type": "Fixed Asset",
+    "root_type": "Asset",
+    "group": "Fixed Assets",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Shelving, counters, pharmacy equipment."
+  },
+  {
+    "code": "1520",
+    "name": "Computer Equipment & Software",
+    "statement_type": "Fixed Asset",
+    "root_type": "Asset",
+    "group": "Fixed Assets",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": ""
+  },
+  {
+    "code": "1530",
+    "name": "Leasehold Improvements",
+    "statement_type": "Fixed Asset",
+    "root_type": "Asset",
+    "group": "Fixed Assets",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": ""
+  },
+  {
+    "code": "1590",
+    "name": "Accumulated Depreciation",
+    "statement_type": "Fixed Asset",
+    "root_type": "Asset",
+    "group": "Fixed Assets",
+    "account_type": "Accumulated Depreciation",
+    "cost_centre": false,
+    "notes": "Contra-asset."
+  },
+  {
+    "code": "2010",
+    "name": "Accounts Payable – Trade (Drug Wholesaler)",
+    "statement_type": "Current Liability",
+    "root_type": "Liability",
+    "group": "Current Liabilities",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Wholesaler invoices not yet paid."
+  },
+  {
+    "code": "2020",
+    "name": "Accounts Payable – Other",
+    "statement_type": "Current Liability",
+    "root_type": "Liability",
+    "group": "Current Liabilities",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": ""
+  },
+  {
+    "code": "2110",
+    "name": "Citi Business Credit Card",
+    "statement_type": "Credit Card",
+    "root_type": "Liability",
+    "group": "Credit Cards",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Bank lines are card payments. Card statements needed to post the spending."
+  },
+  {
+    "code": "2120",
+    "name": "Chase Ink Card …0682",
+    "statement_type": "Credit Card",
+    "root_type": "Liability",
+    "group": "Credit Cards",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Paid in 2021 only. Ask client if replaced by …2383."
+  },
+  {
+    "code": "2130",
+    "name": "Chase Ink Card …2383",
+    "statement_type": "Credit Card",
+    "root_type": "Liability",
+    "group": "Credit Cards",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Bank lines are card payments. Card statements needed."
+  },
+  {
+    "code": "2210",
+    "name": "Payroll Clearing (ADP)",
+    "statement_type": "Current Liability",
+    "root_type": "Liability",
+    "group": "Current Liabilities",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "ADP wage and tax debits land here; cleared by the monthly payroll journal."
+  },
+  {
+    "code": "2220",
+    "name": "Payroll Taxes Payable",
+    "statement_type": "Current Liability",
+    "root_type": "Liability",
+    "group": "Current Liabilities",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": ""
+  },
+  {
+    "code": "2230",
+    "name": "Accrued Wages",
+    "statement_type": "Current Liability",
+    "root_type": "Liability",
+    "group": "Current Liabilities",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Year-end only."
+  },
+  {
+    "code": "2310",
+    "name": "Florida Sales Tax Payable",
+    "statement_type": "Current Liability",
+    "root_type": "Liability",
+    "group": "Current Liabilities",
+    "account_type": "Tax",
+    "cost_centre": false,
+    "notes": "Tax on taxable front-store sales. Prescription drugs are exempt."
+  },
+  {
+    "code": "2410",
+    "name": "Accrued Expenses",
+    "statement_type": "Current Liability",
+    "root_type": "Liability",
+    "group": "Current Liabilities",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": ""
+  },
+  {
+    "code": "2510",
+    "name": "Shareholder Loan",
+    "statement_type": "Non-current Liability",
+    "root_type": "Liability",
+    "group": "Non-current Liabilities",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": ""
+  },
+  {
+    "code": "2900",
+    "name": "Suspense – Awaiting Client Support",
+    "statement_type": "Current Liability",
+    "root_type": "Liability",
+    "group": "Current Liabilities",
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Temporary. Every line here must be on the query list. Target: zero at year end."
+  },
+  {
+    "code": "3010",
+    "name": "Common Stock",
+    "statement_type": "Equity",
+    "root_type": "Equity",
+    "group": null,
+    "account_type": null,
+    "cost_centre": false,
+    "notes": ""
+  },
+  {
+    "code": "3020",
+    "name": "Owner Capital Contributions",
+    "statement_type": "Equity",
+    "root_type": "Equity",
+    "group": null,
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Initial funding of the business (Jul 2021)."
+  },
+  {
+    "code": "3030",
+    "name": "Shareholder Distributions",
+    "statement_type": "Equity",
+    "root_type": "Equity",
+    "group": null,
+    "account_type": null,
+    "cost_centre": false,
+    "notes": ""
+  },
+  {
+    "code": "3040",
+    "name": "Retained Earnings",
+    "statement_type": "Equity",
+    "root_type": "Equity",
+    "group": null,
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "System-maintained after year 1."
+  },
+  {
+    "code": "3050",
+    "name": "Opening Balance Equity",
+    "statement_type": "Equity",
+    "root_type": "Equity",
+    "group": null,
+    "account_type": null,
+    "cost_centre": false,
+    "notes": "Conversion only. Must be zero once the opening TB is posted."
+  },
+  {
+    "code": "4010",
+    "name": "Prescription Revenue – Third-party Payers",
+    "statement_type": "Revenue",
+    "root_type": "Income",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Claim reimbursements from PBMs / insurers (wires and payer cheques)."
+  },
+  {
+    "code": "4020",
+    "name": "Point-of-Sale Revenue – Copays & Front Store",
+    "statement_type": "Revenue",
+    "root_type": "Income",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Square settlements and cash takings."
+  },
+  {
+    "code": "4040",
+    "name": "340B Program Revenue",
+    "statement_type": "Revenue",
+    "root_type": "Income",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Dispensing fees from the 340B administrator."
+  },
+  {
+    "code": "4090",
+    "name": "Refunds & Chargebacks",
+    "statement_type": "Revenue",
+    "root_type": "Income",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Contra-revenue."
+  },
+  {
+    "code": "4900",
+    "name": "Other Income",
+    "statement_type": "Other Income",
+    "root_type": "Income",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "5010",
+    "name": "Cost of Goods Sold – Prescription Drugs",
+    "statement_type": "Direct Costs",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Wholesaler purchases (expensed when paid; inventory adjusted at year end)."
+  },
+  {
+    "code": "5020",
+    "name": "Cost of Goods Sold – Front Store / OTC",
+    "statement_type": "Direct Costs",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "5030",
+    "name": "Inventory Count Adjustment",
+    "statement_type": "Direct Costs",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Year-end stock adjustment."
+  },
+  {
+    "code": "6010",
+    "name": "Salaries & Wages",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "From ADP payroll journal (gross pay)."
+  },
+  {
+    "code": "6020",
+    "name": "Payroll Taxes – Employer",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "From ADP payroll journal."
+  },
+  {
+    "code": "6030",
+    "name": "Payroll Processing Fees",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6040",
+    "name": "Employee Benefits",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6110",
+    "name": "Rent",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6120",
+    "name": "Utilities",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6130",
+    "name": "Repairs & Maintenance",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6210",
+    "name": "Accounting & Legal Fees",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6220",
+    "name": "Contract Labour (1099)",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Track vendors for 1099-NEC."
+  },
+  {
+    "code": "6310",
+    "name": "Pharmacy Software & Subscriptions",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6320",
+    "name": "Telephone & Internet",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6410",
+    "name": "Insurance – Liability & Professional",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6510",
+    "name": "Licences & Permits",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "DEA, state board of pharmacy."
+  },
+  {
+    "code": "6610",
+    "name": "Bank Service Charges",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6620",
+    "name": "Wire & Returned Item Fees",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6630",
+    "name": "Merchant Processing Fees",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Square fees (from Square reports)."
+  },
+  {
+    "code": "6710",
+    "name": "Office & Pharmacy Supplies",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": "Vials, labels, bags, printer supplies."
+  },
+  {
+    "code": "6720",
+    "name": "Delivery & Courier",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6810",
+    "name": "Marketing & Advertising",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "6910",
+    "name": "Depreciation",
+    "statement_type": "Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "7010",
+    "name": "Interest Expense",
+    "statement_type": "Other Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": true,
+    "notes": ""
+  },
+  {
+    "code": "8010",
+    "name": "Income Tax Expense",
+    "statement_type": "Other Expense",
+    "root_type": "Expense",
+    "group": null,
+    "account_type": null,
+    "cost_centre": false,
+    "notes": ""
+  }
+]

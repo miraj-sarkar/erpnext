@@ -1,0 +1,72 @@
+{
+  "company_name": "Cheer Health Inc",
+  "abbr": "CH",
+  "country": "United States",
+  "default_currency": "USD",
+  "address_line1": "7200 W Commercial Blvd, Ste 203",
+  "city": "Fort Lauderdale",
+  "state": "Florida",
+  "pincode": "33319",
+  "banks": [
+    "Chase",
+    "Citi"
+  ],
+  "bank_accounts": [
+    {
+      "gl": "1010",
+      "account_name": "Chase Business Checking …8905 (Operating)",
+      "bank": "Chase",
+      "bank_account_no": "8905",
+      "is_default": true,
+      "is_credit_card": false
+    },
+    {
+      "gl": "1020",
+      "account_name": "Chase Checking …8862 (Reserve)",
+      "bank": "Chase",
+      "bank_account_no": "8862",
+      "is_default": false,
+      "is_credit_card": false
+    },
+    {
+      "gl": "1030",
+      "account_name": "Chase Checking …1063",
+      "bank": "Chase",
+      "bank_account_no": "1063",
+      "is_default": false,
+      "is_credit_card": false
+    },
+    {
+      "gl": "1040",
+      "account_name": "Chase Checking …0802 (Legacy)",
+      "bank": "Chase",
+      "bank_account_no": "0802",
+      "is_default": false,
+      "is_credit_card": false
+    },
+    {
+      "gl": "2110",
+      "account_name": "Citi Business Credit Card",
+      "bank": "Citi",
+      "bank_account_no": null,
+      "is_default": false,
+      "is_credit_card": true
+    },
+    {
+      "gl": "2120",
+      "account_name": "Chase Ink Card …0682",
+      "bank": "Chase",
+      "bank_account_no": "0682",
+      "is_default": false,
+      "is_credit_card": true
+    },
+    {
+      "gl": "2130",
+      "account_name": "Chase Ink Card …2383",
+      "bank": "Chase",
+      "bank_account_no": "2383",
+      "is_default": false,
+      "is_credit_card": true
+    }
+  ]
+}

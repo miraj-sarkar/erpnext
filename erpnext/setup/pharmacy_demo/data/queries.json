@@ -1,0 +1,68 @@
+[
+  {
+    "number": 1,
+    "item": "66 cheques with no payee (2021–2023)",
+    "ask": "Copy of the cheque register or cheque images. Several round amounts ($25k–$130k) need a clear explanation: loan repayment, owner draw or supplier payment?",
+    "where": "2900 Suspense"
+  },
+  {
+    "number": 2,
+    "item": "Wire of $30,000 to an individual (21 Jun 2023)",
+    "ask": "Who is the payee and what was it for (contractor, loan, distribution)?",
+    "where": "2900 Suspense"
+  },
+  {
+    "number": 3,
+    "item": "Zelle payment of $1,100 to an individual (7 Apr 2023)",
+    "ask": "Payee and purpose; is the payee a 1099 contractor?",
+    "where": "2900 Suspense"
+  },
+  {
+    "number": 4,
+    "item": "Returned cheque of $94,265.69 (12 Apr 2022) + $12 fee",
+    "ask": "Which payer issued it, and was it replaced? Is any amount still owed?",
+    "where": "Reversed against 4010; follow up"
+  },
+  {
+    "number": 5,
+    "item": "ADP wage and tax debits (Mar–Dec 2023)",
+    "ask": "Monthly ADP payroll registers so payroll clearing can be split into gross wages, employer tax and withholdings.",
+    "where": "2210 Payroll clearing"
+  },
+  {
+    "number": 6,
+    "item": "Credit card payments (Citi, Chase …0682, …2383)",
+    "ask": "Monthly card statements so the spending behind each payment can be coded.",
+    "where": "2110 / 2120 / 2130"
+  },
+  {
+    "number": 7,
+    "item": "Card …0682 stopped after Nov 2021; …2383 started Dec 2021",
+    "ask": "Was …0682 replaced by …2383 (same card account)? If yes, merge the two accounts.",
+    "where": "2120 / 2130"
+  },
+  {
+    "number": 8,
+    "item": "Transfers with …8862, …1063, …0802",
+    "ask": "Statements for these three accounts so they can be reconciled. …1063 shows a negative balance until they arrive.",
+    "where": "1020 / 1030 / 1040"
+  },
+  {
+    "number": 9,
+    "item": "Square settlements",
+    "ask": "Monthly Square sales summary: gross sales, taxable front-store sales, sales tax and fees.",
+    "where": "4020 at net"
+  },
+  {
+    "number": 10,
+    "item": "Wholesaler purchases before Jun 2022",
+    "ask": "How was the wholesaler paid before the auto-debit started (cheque or card)?",
+    "where": "Covered by cheque query"
+  },
+  {
+    "number": 11,
+    "item": "Year-end balances",
+    "ask": "Inventory count, unpaid wholesaler invoices and unpaid claims at 31 Dec 2022 and 31 Dec 2023.",
+    "where": "Year-end journals"
+  }
+]

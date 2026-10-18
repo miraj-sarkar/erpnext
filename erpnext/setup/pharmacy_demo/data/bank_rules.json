@@ -1,0 +1,322 @@
+[
+  {
+    "code": "R11",
+    "priority": 1,
+    "contains": [
+      "Mckesson Drug"
+    ],
+    "transaction_type": "Any",
+    "account": "5010",
+    "cost_centre": "RX",
+    "meaning": "Wholesaler auto-debit. Match this before Pharmco.",
+    "rule_name": "CH-R11"
+  },
+  {
+    "code": "R08",
+    "priority": 2,
+    "contains": [
+      "Sdv-Vrfy"
+    ],
+    "transaction_type": "Any",
+    "account": "6610",
+    "cost_centre": "ADM",
+    "meaning": "$0.01 Square account verification.",
+    "rule_name": "CH-R08"
+  },
+  {
+    "code": "R13",
+    "priority": 3,
+    "contains": [
+      "0682"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "2120",
+    "cost_centre": null,
+    "meaning": "Payment to Chase Ink …0682.",
+    "rule_name": "CH-R13"
+  },
+  {
+    "code": "R14",
+    "priority": 4,
+    "contains": [
+      "2383"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "2130",
+    "cost_centre": null,
+    "meaning": "Payment to Chase Ink …2383.",
+    "rule_name": "CH-R14"
+  },
+  {
+    "code": "R12",
+    "priority": 5,
+    "contains": [
+      "Citi Card Online"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "2110",
+    "cost_centre": null,
+    "meaning": "Payment to the Citi business card.",
+    "rule_name": "CH-R12"
+  },
+  {
+    "code": "R17",
+    "priority": 6,
+    "contains": [
+      "ADP Payroll Fees"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "6030",
+    "cost_centre": "ADM",
+    "meaning": "ADP service fee.",
+    "rule_name": "CH-R17"
+  },
+  {
+    "code": "R15",
+    "priority": 7,
+    "contains": [
+      "ADP Wage Pay"
+    ],
+    "transaction_type": "Any",
+    "account": "2210",
+    "cost_centre": null,
+    "meaning": "Net pay, or a wage amount paid back in. Stays in payroll clearing.",
+    "rule_name": "CH-R15"
+  },
+  {
+    "code": "R16",
+    "priority": 8,
+    "contains": [
+      "ADP Tax"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "2210",
+    "cost_centre": null,
+    "meaning": "Payroll taxes collected by ADP.",
+    "rule_name": "CH-R16"
+  },
+  {
+    "code": "R18",
+    "priority": 9,
+    "contains": [
+      "8862"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "1020",
+    "cost_centre": null,
+    "meaning": "Transfer to the reserve account.",
+    "rule_name": "CH-R18"
+  },
+  {
+    "code": "R19",
+    "priority": 10,
+    "contains": [
+      "1063"
+    ],
+    "transaction_type": "Deposit",
+    "account": "1030",
+    "cost_centre": null,
+    "meaning": "Transfer in from …1063.",
+    "rule_name": "CH-R19"
+  },
+  {
+    "code": "R20",
+    "priority": 11,
+    "contains": [
+      "0802"
+    ],
+    "transaction_type": "Deposit",
+    "account": "1040",
+    "cost_centre": null,
+    "meaning": "Transfer in from the legacy account.",
+    "rule_name": "CH-R20"
+  },
+  {
+    "code": "R01",
+    "priority": 12,
+    "contains": [
+      "Pharmco"
+    ],
+    "transaction_type": "Deposit",
+    "account": "4010",
+    "cost_centre": "RX",
+    "meaning": "PBM claim reimbursement wire.",
+    "rule_name": "CH-R01"
+  },
+  {
+    "code": "R05",
+    "priority": 13,
+    "contains": [
+      "Deposited Item Returned"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "4010",
+    "cost_centre": "RX",
+    "meaning": "Bounced payer cheque. Reverse prescription revenue.",
+    "query": true,
+    "rule_name": "CH-R05"
+  },
+  {
+    "code": "R22",
+    "priority": 14,
+    "contains": [
+      "Domestic Incoming Wire Fee",
+      "Deposit Item Returned Fee"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "6620",
+    "cost_centre": "ADM",
+    "meaning": "Wire fee or returned-item fee.",
+    "rule_name": "CH-R22"
+  },
+  {
+    "code": "R21",
+    "priority": 15,
+    "contains": [
+      "Service Charges For The Month"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "6610",
+    "cost_centre": "ADM",
+    "meaning": "Monthly account fee.",
+    "rule_name": "CH-R21"
+  },
+  {
+    "code": "R02",
+    "priority": 16,
+    "contains": [
+      "Remote Online Deposit"
+    ],
+    "transaction_type": "Deposit",
+    "account": "4010",
+    "cost_centre": "RX",
+    "meaning": "Remote cheque deposit from a payer.",
+    "rule_name": "CH-R02"
+  },
+  {
+    "code": "R04",
+    "priority": 17,
+    "contains": [
+      "ATM Check Deposit"
+    ],
+    "transaction_type": "Deposit",
+    "max_amount": 999.99,
+    "account": "4020",
+    "cost_centre": "POS",
+    "meaning": "Patient cheque under $1,000.",
+    "rule_name": "CH-R04"
+  },
+  {
+    "code": "R03",
+    "priority": 18,
+    "contains": [
+      "ATM Check Deposit"
+    ],
+    "transaction_type": "Deposit",
+    "min_amount": 1000,
+    "account": "4010",
+    "cost_centre": "RX",
+    "meaning": "Payer cheque of $1,000 or more.",
+    "rule_name": "CH-R03"
+  },
+  {
+    "code": "R09",
+    "priority": 19,
+    "contains": [
+      "ATM Cash Deposit"
+    ],
+    "transaction_type": "Deposit",
+    "account": "4020",
+    "cost_centre": "POS",
+    "meaning": "Till cash banked at an ATM.",
+    "rule_name": "CH-R09"
+  },
+  {
+    "code": "R10",
+    "priority": 20,
+    "contains": [
+      "Wellpartne"
+    ],
+    "transaction_type": "Deposit",
+    "account": "4040",
+    "cost_centre": "340B",
+    "meaning": "340B administrator payment.",
+    "rule_name": "CH-R10"
+  },
+  {
+    "code": "R07",
+    "priority": 21,
+    "contains": [
+      "Square Inc"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "4090",
+    "cost_centre": "POS",
+    "meaning": "Square refund or chargeback.",
+    "rule_name": "CH-R07"
+  },
+  {
+    "code": "R06",
+    "priority": 22,
+    "contains": [
+      "Square Inc"
+    ],
+    "transaction_type": "Deposit",
+    "account": "4020",
+    "cost_centre": "POS",
+    "meaning": "Square card settlement, net of fees.",
+    "rule_name": "CH-R06"
+  },
+  {
+    "code": "R23",
+    "priority": 23,
+    "contains": [
+      "Check #"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "2900",
+    "cost_centre": null,
+    "meaning": "Cheque with no payee on the statement.",
+    "query": true,
+    "rule_name": "CH-R23"
+  },
+  {
+    "code": "R24",
+    "priority": 24,
+    "contains": [
+      "Zelle Payment",
+      "Online Domestic Wire Transfer"
+    ],
+    "transaction_type": "Withdrawal",
+    "account": "2900",
+    "cost_centre": null,
+    "meaning": "Payment to an individual. Purpose unknown.",
+    "query": true,
+    "rule_name": "CH-R24"
+  },
+  {
+    "code": "R26",
+    "priority": 25,
+    "contains": [
+      "CR Due To ATM/Dep Error"
+    ],
+    "transaction_type": "Any",
+    "account": "6610",
+    "cost_centre": "ADM",
+    "meaning": "Bank correction of an ATM or deposit error.",
+    "rule_name": "CH-R26"
+  },
+  {
+    "code": "R25",
+    "priority": 26,
+    "contains": [
+      "Balance Transfer Credit",
+      "Reversal"
+    ],
+    "transaction_type": "Any",
+    "account": "3020",
+    "cost_centre": null,
+    "meaning": "Initial funding of the account. Prior period only.",
+    "rule_name": "CH-R25"
+  }
+]

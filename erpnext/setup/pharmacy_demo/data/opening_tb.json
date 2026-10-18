@@ -1,0 +1,106 @@
+[
+  {
+    "code": "1010",
+    "account": "Chase Business Checking …8905 (Operating)",
+    "debit": 148921.64,
+    "credit": 0.0,
+    "cost_centre": null,
+    "basis": "Ties to Chase statement 31 Dec 2021"
+  },
+  {
+    "code": "1020",
+    "account": "Chase Checking …8862 (Reserve)",
+    "debit": 300000.0,
+    "credit": 0.0,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "1040",
+    "account": "Chase Checking …0802 (Legacy)",
+    "debit": 127109.22,
+    "credit": 0.0,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "1210",
+    "account": "Inventory – Prescription Drugs",
+    "debit": 95000.0,
+    "credit": 0.0,
+    "cost_centre": "RX",
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "1220",
+    "account": "Inventory – Front Store / OTC",
+    "debit": 8500.0,
+    "credit": 0.0,
+    "cost_centre": "POS",
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "1510",
+    "account": "Furniture, Fixtures & Equipment",
+    "debit": 42000.0,
+    "credit": 0.0,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "1590",
+    "account": "Accumulated Depreciation",
+    "debit": 0.0,
+    "credit": 6300.0,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "2010",
+    "account": "Accounts Payable – Trade (Drug Wholesaler)",
+    "debit": 0.0,
+    "credit": 31450.0,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "2110",
+    "account": "Citi Business Credit Card",
+    "debit": 0.0,
+    "credit": 14820.0,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "2130",
+    "account": "Chase Ink Card …2383",
+    "debit": 0.0,
+    "credit": 9640.0,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "3010",
+    "account": "Common Stock",
+    "debit": 0.0,
+    "credit": 1000.0,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "3020",
+    "account": "Owner Capital Contributions",
+    "debit": 0.0,
+    "credit": 359755.58,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  },
+  {
+    "code": "3040",
+    "account": "Retained Earnings",
+    "debit": 0.0,
+    "credit": 298565.28,
+    "cost_centre": null,
+    "basis": "Scenario assumption"
+  }
+]
