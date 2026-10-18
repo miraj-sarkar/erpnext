@@ -6,7 +6,12 @@ FROM ${ERPNEXT_BASE}
 
 USER root
 
-RUN apt-get update \
+# The develop image creates user frappe with group 0 (root), not a group named frappe.
+# COPY --chown=frappe:frappe and later chown calls need that group name to exist.
+RUN if ! getent group frappe >/dev/null 2>&1; then \
+		groupadd --system --gid 1000 frappe 2>/dev/null || groupadd --system frappe; \
+	fi \
+	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
 		supervisor \
 		gettext-base \
