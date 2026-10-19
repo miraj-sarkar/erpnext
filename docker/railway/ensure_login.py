@@ -31,7 +31,7 @@ def main():
 
 	site = os.environ.get("SITE_NAME", "frontend")
 	email = os.environ.get("SITE_ADMIN_EMAIL", "nawmi@arcloops.io")
-	password = os.environ.get("SITE_ADMIN_PASSWORD", "12345678")
+	password = os.environ.get("SITE_ADMIN_PASSWORD", "Pass12345678!")
 	site_config = os.path.join(SITES, site, "site_config.json")
 
 	if not os.path.isfile(site_config):
