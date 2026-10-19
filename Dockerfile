@@ -54,21 +54,36 @@ RUN if [ -d /tmp/erpnext-node_modules ]; then \
 USER frappe
 WORKDIR /home/frappe/frappe-bench
 
+# The base image keeps the full Frappe + ERPNext build in /home/frappe/frappe-bench/assets
+# and removes sites/assets, because sites/ is a volume. Rebuilding only ERPNext into an
+# empty sites/assets writes an assets.json that has no login.bundle.css, so the login
+# page requests /login.bundle.css and the browser never loads jQuery.
 RUN echo '{"webserver_port": 8000}' > sites/common_site_config.json \
+	&& if [ ! -e sites/assets ] && [ -d /home/frappe/frappe-bench/assets ]; then \
+		ln -s /home/frappe/frappe-bench/assets sites/assets; \
+	fi \
 	&& ./env/bin/pip install -e apps/erpnext \
 	&& yarn --cwd apps/erpnext --frozen-lockfile \
 	&& /usr/local/bin/bench build --app erpnext \
+	&& ./env/bin/python -c 'import json,os; d=json.load(open("sites/assets/assets.json")); req=["login.bundle.css","website.bundle.css","frappe-web.bundle.js"]; missing=[k for k in req if k not in d]; assert not missing, "assets.json missing %s" % missing; [open(os.path.join("sites", d[k].lstrip("/"))).close() for k in req]' \
 	&& mkdir -p built_sites \
 	&& printf 'frappe\nerpnext\n' > built_sites/apps.txt \
 	&& printf 'frappe\nerpnext\n' > sites/apps.txt \
-	&& test -s sites/assets/assets.json \
-	&& rm -rf /home/frappe/frappe-bench/assets \
-	&& cp -a sites/assets /home/frappe/frappe-bench/assets \
+	&& if [ ! -L sites/assets ]; then \
+		rm -rf /home/frappe/frappe-bench/assets; \
+		mkdir -p /home/frappe/frappe-bench/assets; \
+		cp -a sites/assets/. /home/frappe/frappe-bench/assets/; \
+	fi \
 	&& if [ -f sites/apps.json ]; then cp sites/apps.json built_sites/apps.json; fi
 
 USER root
-RUN chmod -R a+rX /home/frappe/frappe-bench/assets \
-	&& chmod 755 /home/frappe /home/frappe/frappe-bench
+RUN chmod -R a+rX \
+		/home/frappe/frappe-bench/assets \
+		/home/frappe/frappe-bench/apps/frappe/frappe/public \
+		/home/frappe/frappe-bench/apps/erpnext/erpnext/public \
+	&& chmod 755 /home/frappe /home/frappe/frappe-bench /home/frappe/frappe-bench/apps \
+		/home/frappe/frappe-bench/apps/frappe /home/frappe/frappe-bench/apps/frappe/frappe \
+		/home/frappe/frappe-bench/apps/erpnext /home/frappe/frappe-bench/apps/erpnext/erpnext
 EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/railway-entrypoint.sh"]
 CMD ["/usr/local/bin/railway-cmd.sh"]
