@@ -66,6 +66,16 @@ else
 	fi
 fi
 
+if [ -f "${SITES_DIR}/${SITE_NAME}/site_config.json" ]; then
+	echo "-> Migrating ${SITE_NAME}"
+	if run_bench --site "${SITE_NAME}" migrate; then
+		run_bench --site "${SITE_NAME}" clear-cache || true
+		echo "-> Migrate finished"
+	else
+		echo "-> migrate failed; continuing so the web server can start"
+	fi
+fi
+
 echo "-> Ensuring login user"
 export SITE_NAME
 export FRAPPE_STREAM_LOGGING=1
