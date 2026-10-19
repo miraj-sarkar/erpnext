@@ -26,11 +26,16 @@ POSTABLE_LINES = 653
 
 
 def setup_pharmacy_demo():
-	"""Create Cheer Health Inc, post the opening trial balance, and book FY2022–FY2023."""
+	"""Create Cheer Health Inc, post the opening trial balance, and book FY2022–FY2023.
+
+	A finished company is left as-is. An interrupted load continues from the
+	vouchers already committed, and does not post those vouchers again.
+	"""
 	frappe.set_user("Administrator")
-	if frappe.db.exists("Company", COMPANY_NAME):
-		frappe.throw(f"{COMPANY_NAME} already exists. The pharmacy demo was not posted again.")
-	if frappe.db.exists("Company", {"abbr": COMPANY_ABBR}):
+	if _demo_is_complete():
+		print(f"Pharmacy demo already loaded: {COMPANY_NAME}")
+		return
+	if frappe.db.exists("Company", {"abbr": COMPANY_ABBR, "name": ["!=", COMPANY_NAME]}):
 		frappe.throw(f"Abbreviation {COMPANY_ABBR} is already used. The pharmacy demo was not posted.")
 
 	transactions = [row for row in read_data("transactions") if row["post"]]
@@ -46,16 +51,32 @@ def setup_pharmacy_demo():
 	banks = _create_banks(company, accounts)
 	_set_company_defaults(accounts, cost_centres)
 	_post_opening_entry(accounts, cost_centres)
+	frappe.db.commit()
 	_create_rules(accounts)
 	_post_bank_lines(transactions, banks[OPERATING_ACCOUNT], accounts, cost_centres)
 	_post_allocations(accounts, cost_centres)
 	_create_statement_balances(banks[OPERATING_ACCOUNT])
 	_create_queries()
+	frappe.db.commit()
 	verify_pharmacy_demo()
 	print(f"Pharmacy demo ready: {COMPANY_NAME}")
 
 
+def _demo_is_complete() -> bool:
+	if not frappe.db.exists("Company", COMPANY_NAME):
+		return False
+	try:
+		verify_pharmacy_demo()
+	except frappe.ValidationError:
+		frappe.db.rollback()
+		print(f"{COMPANY_NAME} is only partly loaded. Continuing from posted vouchers.")
+		return False
+	return True
+
+
 def _create_company():
+	if frappe.db.exists("Company", COMPANY_NAME):
+		return
 	frappe.local.flags.ignore_chart_of_accounts = True
 	company = frappe.get_doc(
 		{
@@ -74,20 +95,29 @@ def _create_company():
 
 
 def _create_chart():
+	accounts = _account_map()
+	missing = [row["code"] for row in read_data("coa") if row["code"] not in accounts]
+	if not missing:
+		return accounts
 	frappe.local.flags.ignore_root_company_validation = True
 	create_charts(COMPANY_NAME, custom_chart=_chart(read_data("coa")))
-	accounts = {}
-	for row in frappe.get_all(
-		"Account",
-		filters={"company": COMPANY_NAME, "is_group": 0},
-		fields=["name", "account_number"],
-	):
-		if row.account_number:
-			accounts[row.account_number] = row.name
+	accounts = _account_map()
 	missing = [row["code"] for row in read_data("coa") if row["code"] not in accounts]
 	if missing:
 		frappe.throw(f"Chart of accounts is missing {', '.join(missing)}.")
 	return accounts
+
+
+def _account_map() -> dict:
+	rows = frappe.db.sql(
+		"""
+		SELECT name, account_number
+		FROM `tabAccount`
+		WHERE company = %s AND is_group = 0 AND IFNULL(account_number, '') != ''
+		""",
+		COMPANY_NAME,
+	)
+	return {number: name for name, number in rows}
 
 
 def _chart(accounts: list[dict]) -> dict:
@@ -155,6 +185,12 @@ def _create_cost_centres():
 	)
 	centres = {}
 	for row in read_data("cost_centres"):
+		existing = frappe.db.get_value(
+			"Cost Center", {"company": COMPANY_NAME, "cost_center_number": row["code"]}, "name"
+		)
+		if existing:
+			centres[row["code"]] = existing
+			continue
 		document = frappe.get_doc(
 			{
 				"doctype": "Cost Center",
@@ -171,6 +207,11 @@ def _create_cost_centres():
 
 
 def _create_address(company: dict):
+	if frappe.db.exists(
+		"Dynamic Link",
+		{"link_doctype": "Company", "link_name": COMPANY_NAME, "parenttype": "Address"},
+	):
+		return
 	frappe.get_doc(
 		{
 			"doctype": "Address",
@@ -194,6 +235,14 @@ def _create_banks(company: dict, accounts: dict) -> dict:
 
 	created = {}
 	for row in company["bank_accounts"]:
+		existing = frappe.db.get_value(
+			"Bank Account",
+			{"account_name": row["account_name"], "company": COMPANY_NAME},
+			"name",
+		)
+		if existing:
+			created[row["gl"]] = existing
+			continue
 		document = frappe.get_doc(
 			{
 				"doctype": "Bank Account",
@@ -228,6 +277,11 @@ def _set_company_defaults(accounts: dict, cost_centres: dict):
 
 
 def _post_opening_entry(accounts: dict, cost_centres: dict):
+	if frappe.db.exists(
+		"Journal Entry",
+		{"company": COMPANY_NAME, "voucher_type": "Opening Entry", "docstatus": 1},
+	):
+		return
 	lines = []
 	for row in read_data("opening_tb"):
 		lines.append(
@@ -248,6 +302,8 @@ def _post_opening_entry(accounts: dict, cost_centres: dict):
 
 def _create_rules(accounts: dict):
 	for rule in read_data("bank_rules"):
+		if frappe.db.exists("Bank Transaction Rule", rule["rule_name"]):
+			continue
 		document = frappe.get_doc(
 			{
 				"doctype": "Bank Transaction Rule",
@@ -271,57 +327,100 @@ def _create_rules(accounts: dict):
 
 def _post_bank_lines(transactions, bank_account: str, accounts: dict, cost_centres: dict):
 	bank = accounts[OPERATING_ACCOUNT]
+	posted = {
+		cheque_no
+		for (cheque_no,) in frappe.db.sql(
+			"""
+			SELECT cheque_no FROM `tabJournal Entry`
+			WHERE company = %s AND docstatus = 1 AND IFNULL(cheque_no, '') != ''
+			""",
+			COMPANY_NAME,
+		)
+	}
 	for index, row in enumerate(transactions, start=1):
-		amount = row["deposit"] or row["withdrawal"]
-		offset = accounts[row["account"]]
-		cost_centre = cost_centres.get(row["cost_centre"]) if row.get("cost_centre") else None
-		if row["deposit"]:
-			lines = [
-				_journal_line(bank, amount, 0, None),
-				_journal_line(offset, 0, amount, cost_centre),
-			]
+		cheque_no = f"CH-{row['id']}"
+		if cheque_no in posted:
+			journal = frappe.db.get_value(
+				"Journal Entry",
+				{"company": COMPANY_NAME, "cheque_no": cheque_no, "docstatus": 1},
+				"name",
+			)
+			_submit_bank_transaction(row, bank_account, cheque_no, journal)
 		else:
-			lines = [
-				_journal_line(offset, amount, 0, cost_centre),
-				_journal_line(bank, 0, amount, None),
-			]
-		journal = _post_journal(
-			"Bank Entry",
-			row["date"],
-			lines,
-			f"{row['rule']}: {row['description']}",
-			cheque_no=f"CH-{row['id']}",
-			cheque_date=row["date"],
-		)
-		bank_transaction = frappe.get_doc(
-			{
-				"doctype": "Bank Transaction",
-				"date": row["date"],
-				"bank_account": bank_account,
-				"company": COMPANY_NAME,
-				"deposit": row["deposit"],
-				"withdrawal": row["withdrawal"],
-				"currency": "USD",
-				"description": row["description"],
-				"reference_number": f"CH-{row['id']}",
-				"is_rule_evaluated": 1,
-				"matched_transaction_rule": f"CH-{row['rule']}",
-			}
-		)
-		bank_transaction.flags.ignore_permissions = True
-		bank_transaction.insert(ignore_permissions=True)
-		bank_transaction.submit()
-		reconcile_vouchers(
-			bank_transaction.name,
-			[{"payment_doctype": "Journal Entry", "payment_name": journal}],
-		)
-		if index % 50 == 0:
+			amount = row["deposit"] or row["withdrawal"]
+			offset = accounts[row["account"]]
+			cost_centre = cost_centres.get(row["cost_centre"]) if row.get("cost_centre") else None
+			if row["deposit"]:
+				lines = [
+					_journal_line(bank, amount, 0, None),
+					_journal_line(offset, 0, amount, cost_centre),
+				]
+			else:
+				lines = [
+					_journal_line(offset, amount, 0, cost_centre),
+					_journal_line(bank, 0, amount, None),
+				]
+			journal = _post_journal(
+				"Bank Entry",
+				row["date"],
+				lines,
+				f"{row['rule']}: {row['description']}",
+				cheque_no=cheque_no,
+				cheque_date=row["date"],
+			)
+			_submit_bank_transaction(row, bank_account, cheque_no, journal)
+		if index % 25 == 0:
+			frappe.db.commit()
 			print(f"Posted {index} of {len(transactions)} bank lines")
+	frappe.db.commit()
+
+
+def _submit_bank_transaction(row: dict, bank_account: str, cheque_no: str, journal: str):
+	existing = frappe.db.get_value(
+		"Bank Transaction",
+		{"company": COMPANY_NAME, "reference_number": cheque_no, "docstatus": 1},
+		["name", "status"],
+		as_dict=True,
+	)
+	if existing:
+		if existing.status != "Reconciled":
+			reconcile_vouchers(
+				existing.name,
+				[{"payment_doctype": "Journal Entry", "payment_name": journal}],
+			)
+		return
+	bank_transaction = frappe.get_doc(
+		{
+			"doctype": "Bank Transaction",
+			"date": row["date"],
+			"bank_account": bank_account,
+			"company": COMPANY_NAME,
+			"deposit": row["deposit"],
+			"withdrawal": row["withdrawal"],
+			"currency": "USD",
+			"description": row["description"],
+			"reference_number": cheque_no,
+			"is_rule_evaluated": 1,
+			"matched_transaction_rule": f"CH-{row['rule']}",
+		}
+	)
+	bank_transaction.flags.ignore_permissions = True
+	bank_transaction.insert(ignore_permissions=True)
+	bank_transaction.submit()
+	reconcile_vouchers(
+		bank_transaction.name,
+		[{"payment_doctype": "Journal Entry", "payment_name": journal}],
+	)
 
 
 def _post_allocations(accounts: dict, cost_centres: dict):
 	journals, flagged = allocation_journals(read_data("transactions"))
 	for journal in journals:
+		if frappe.db.exists(
+			"Journal Entry",
+			{"company": COMPANY_NAME, "docstatus": 1, "user_remark": journal["user_remark"]},
+		):
+			continue
 		lines = [
 			_journal_line(
 				accounts[row["account"]],
@@ -340,6 +439,10 @@ def _create_statement_balances(bank_account: str):
 	for row in read_data("bank_rec"):
 		if not row["statement"].startswith(("2022", "2023")):
 			continue
+		if frappe.db.exists(
+			"Bank Account Balance", {"bank_account": bank_account, "date": row["period_end"]}
+		):
+			continue
 		frappe.get_doc(
 			{
 				"doctype": "Bank Account Balance",
@@ -352,6 +455,15 @@ def _create_statement_balances(bank_account: str):
 
 def _create_queries():
 	for query in read_data("queries"):
+		if frappe.db.exists(
+			"ToDo",
+			{
+				"reference_type": "Company",
+				"reference_name": COMPANY_NAME,
+				"description": ["like", f"{query['number']}.%"],
+			},
+		):
+			continue
 		frappe.get_doc(
 			{
 				"doctype": "ToDo",

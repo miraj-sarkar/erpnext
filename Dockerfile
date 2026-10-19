@@ -29,6 +29,7 @@ COPY --chmod=0755 docker/railway/prepare-sites.sh /usr/local/bin/railway-prepare
 COPY --chmod=0755 docker/railway/entrypoint.sh /usr/local/bin/railway-entrypoint.sh
 COPY --chmod=0755 docker/railway/cmd.sh /usr/local/bin/railway-cmd.sh
 COPY --chmod=0755 docker/railway/ensure_login.py /usr/local/bin/railway-ensure-login.py
+COPY --chmod=0755 docker/railway/load-pharmacy-demo.sh /usr/local/bin/railway-pharmacy-demo.sh
 
 # Replace the stock ERPNext app with this Git repo, but keep JS deps from
 # the base image (Git and .dockerignore do not include node_modules).
@@ -60,10 +61,14 @@ RUN echo '{"webserver_port": 8000}' > sites/common_site_config.json \
 	&& mkdir -p built_sites \
 	&& printf 'frappe\nerpnext\n' > built_sites/apps.txt \
 	&& printf 'frappe\nerpnext\n' > sites/apps.txt \
+	&& test -s sites/assets/assets.json \
+	&& rm -rf /home/frappe/frappe-bench/assets \
 	&& cp -a sites/assets /home/frappe/frappe-bench/assets \
 	&& if [ -f sites/apps.json ]; then cp sites/apps.json built_sites/apps.json; fi
 
 USER root
+RUN chmod -R a+rX /home/frappe/frappe-bench/assets \
+	&& chmod 755 /home/frappe /home/frappe/frappe-bench
 EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/railway-entrypoint.sh"]
 CMD ["/usr/local/bin/railway-cmd.sh"]

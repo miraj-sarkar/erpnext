@@ -18,10 +18,20 @@ for _ in $(seq 1 30); do
 	sleep 1
 done
 
-if [ -d "$BAKED_ASSETS" ]; then
+# nginx try_files does not serve a symlink that points off the volume (sendfile
+# crosses filesystems and the request becomes a 404). Copy the baked build onto
+# the volume so /assets and sites/assets/assets.json are the same files.
+if [ -d "$BAKED_ASSETS" ] && [ -f "$BAKED_ASSETS/assets.json" ]; then
 	rm -rf "$SITES/assets"
-	ln -sfn "$BAKED_ASSETS" "$SITES/assets"
+	mkdir -p "$SITES/assets"
+	cp -a "$BAKED_ASSETS"/. "$SITES/assets"/
+	chmod -R a+rX "$SITES/assets" || true
+	echo "-> Copied baked assets onto the sites volume"
+else
+	echo "-> Baked assets are missing; /assets will 404 until the image is rebuilt"
 fi
+
+chmod 755 /home/frappe /home/frappe/frappe-bench 2>/dev/null || true
 
 if [ ! -s "$SITES/apps.txt" ]; then
 	if [ -f "$BAKED_APPS_TXT" ]; then
