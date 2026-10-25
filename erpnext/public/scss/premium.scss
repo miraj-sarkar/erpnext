@@ -326,6 +326,63 @@ button:focus-visible {
 	color: var(--erp-ink);
 }
 
+/* The header is the module switcher: make the current module obvious. */
+.body-sidebar .shell-header {
+	height: 52px;
+	margin: 10px 8px 12px;
+	padding: 0 10px;
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--card-shadow);
+}
+
+.body-sidebar .shell-header .header-title {
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--erp-ink);
+}
+
+.body-sidebar .shell-header .drop-icon {
+	color: var(--erp-accent);
+}
+
+.body-sidebar .indent + .nested-container {
+	margin-top: 2px;
+	margin-bottom: 8px;
+	border-left-color: var(--erp-accent);
+}
+
+/* Search is how any page is found, so keep it wide and easy to see. */
+.navbar .search-bar {
+	max-width: 440px;
+	flex: 1 1 280px;
+}
+
+.navbar .search-bar .awesomplete input {
+	height: 36px;
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-radius: 999px;
+	font-size: 14px;
+}
+
+.widget-group {
+	margin-bottom: 22px;
+}
+
+.shortcut-widget-box .widget-title,
+.links-widget-box .widget-title,
+.number-widget-box .widget-title {
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.links-widget-box .link-content {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
 .body-sidebar .standard-sidebar-item.active-sidebar .item-anchor,
 .body-sidebar .sidebar-item-container:has(> .nested-container.hidden .active-sidebar) > .standard-sidebar-item .item-anchor {
 	background: var(--erp-accent-soft);
