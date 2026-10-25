@@ -238,7 +238,7 @@ label.reqd::after {
 
 .btn-primary,
 .btn-primary:not(:disabled):not(.disabled),
-button.es-button.primary-action,
+button.es-button.primary-action {
 	background-color: var(--erp-accent);
 	border-color: var(--erp-accent);
 	color: var(--erp-on-accent);
