@@ -237,7 +237,8 @@ label.reqd::after {
 }
 
 .btn-primary,
-.btn-primary:not(:disabled):not(.disabled) {
+.btn-primary:not(:disabled):not(.disabled),
+button.es-button.primary-action,
 	background-color: var(--erp-accent);
 	border-color: var(--erp-accent);
 	color: var(--erp-on-accent);
@@ -246,7 +247,9 @@ label.reqd::after {
 .btn-primary:hover,
 .btn-primary:not(:disabled):not(.disabled):hover,
 .btn-primary:focus,
-.btn-primary:not(:disabled):not(.disabled):focus {
+.btn-primary:not(:disabled):not(.disabled):focus,
+button.es-button.primary-action:hover,
+button.es-button.primary-action:focus {
 	background-color: var(--erp-accent);
 	border-color: var(--erp-accent);
 	color: var(--erp-on-accent);
