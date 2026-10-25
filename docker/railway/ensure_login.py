@@ -59,21 +59,33 @@ def main():
 
 	update_password("Administrator", password)
 
+	# System Manager does not include Sales Invoice. Accounts Manager does.
+	roles = [
+		role
+		for role in frappe.get_all("Role", pluck="name")
+		if role not in {"Guest", "All", "Customer", "Supplier", "Administrator", "Employee", "Academics User"}
+	]
+	if "System Manager" not in roles:
+		roles.append("System Manager")
+
 	if not frappe.db.exists("User", email):
 		user = frappe.new_doc("User")
 		user.email = email
 		user.first_name = email.split("@")[0].title()
 		user.send_welcome_email = 0
 		user.enabled = 1
-		user.append("roles", {"role": "System Manager"})
+		for role in roles:
+			user.append("roles", {"role": role})
 		user.flags.ignore_password_policy = True
 		user.insert(ignore_permissions=True)
 	else:
 		user = frappe.get_doc("User", email)
 		user.enabled = 1
 		user.send_welcome_email = 0
-		if not any(role.role == "System Manager" for role in user.roles):
-			user.append("roles", {"role": "System Manager"})
+		existing = {row.role for row in user.roles}
+		for role in roles:
+			if role not in existing:
+				user.append("roles", {"role": role})
 		user.flags.ignore_password_policy = True
 		user.save(ignore_permissions=True)
 
