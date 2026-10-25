@@ -286,20 +286,44 @@ button:focus-visible {
 	border-radius: var(--radius-lg);
 }
 
-/* Easier navigation: taller rows, a clear "you are here" mark, roomier forms. */
+/* Menu: quiet rows, with a clear gap between each group so it does not read as one long list. */
 .body-sidebar .standard-sidebar-item {
-	margin-bottom: 4px;
+	margin-bottom: 1px;
 }
 
 .body-sidebar .standard-sidebar-item .item-anchor {
-	height: 36px;
+	height: 32px;
 	padding-left: 10px;
 	border-radius: var(--radius);
+	color: var(--text-muted);
 }
 
 .body-sidebar .standard-sidebar-item .sidebar-item-label {
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 1.3;
+	font-weight: 400;
+}
+
+.body-sidebar .standard-sidebar-item .sidebar-item-icon svg {
+	opacity: 0.7;
+}
+
+.body-sidebar .sidebar-items > .section-item:has(.section-break):not(:first-child) {
+	margin-top: 18px;
+	padding-top: 14px;
+	border-top: 1px solid var(--border-color);
+}
+
+.body-sidebar .section-break {
+	margin-bottom: 4px;
+}
+
+.body-sidebar .section-break .sidebar-item-label {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--erp-ink);
 }
 
 .body-sidebar .standard-sidebar-item.active-sidebar .item-anchor,
@@ -331,12 +355,50 @@ button:focus-visible {
 	border-radius: var(--radius) var(--radius) 0 0;
 }
 
-.form-layout .section-body {
-	padding-top: 4px;
+/* New and detail pages: one calm card per section, with space between them. */
+body[data-route^="Form"] .layout-main-section {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
 }
 
-.frappe-control {
-	margin-bottom: 2px;
+body[data-route^="Form"] .form-layout {
+	background: transparent;
+}
+
+body[data-route^="Form"] .form-section.card-section,
+body[data-route^="Form"] .form-dashboard-section {
+	margin: 0 0 18px;
+	padding: 8px 18px 20px;
+}
+
+body[data-route^="Form"] .form-section .section-head {
+	padding: 14px 0 10px;
+	margin-bottom: 6px;
+	border-bottom: 1px solid var(--border-color);
+}
+
+body[data-route^="Form"] .form-section .section-body {
+	padding-top: 12px;
+	gap: 4px 18px;
+}
+
+body[data-route^="Form"] .frappe-control {
+	margin-bottom: 10px;
+}
+
+body[data-route^="Form"] .form-grid {
+	margin-top: 8px;
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius);
+}
+
+body[data-route^="Form"] .grid-heading-row {
+	background: var(--subtle-fg);
+}
+
+body[data-route^="Form"] .grid-body .data-row {
+	min-height: 40px;
 }
 
 .list-row,
