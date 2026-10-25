@@ -82,4 +82,8 @@ function startFolderAccordion() {
 	window.setTimeout(() => keepOneOpen(), 300);
 }
 
-frappe.ready(startFolderAccordion);
+if (document.readyState === "loading") {
+	document.addEventListener("DOMContentLoaded", startFolderAccordion);
+} else {
+	startFolderAccordion();
+}
