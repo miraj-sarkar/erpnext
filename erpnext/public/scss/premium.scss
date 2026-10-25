@@ -1,0 +1,376 @@
+// Presentation-only visual system for the desk and website.
+// Loaded after Frappe's own CSS through the existing ERPNext bundles.
+// It restyles tokens and chrome. It does not add controls or change behavior.
+// Remove the @import of this file to revert the theme.
+
+:root,
+[data-theme="light"] {
+	--erp-canvas: #f4f1ea;
+	--erp-sidebar: #efebe3;
+	--erp-card: #fffcf7;
+	--erp-ink: #1c1915;
+	--erp-muted: #6f6962;
+	--erp-line: #e3ddd3;
+	--erp-line-strong: #d2cbc0;
+	--erp-accent: #1d4e5c;
+	--erp-accent-soft: #e5f1f4;
+	--erp-shadow: 0 1px 2px rgba(28, 25, 21, 0.04), 0 8px 24px rgba(28, 25, 21, 0.04);
+
+	--bg-color: var(--erp-canvas);
+	--fg-color: var(--erp-card);
+	--card-bg: var(--erp-card);
+	--modal-bg: var(--erp-card);
+	--popover-bg: var(--erp-card);
+	--navbar-bg: var(--erp-sidebar);
+	--desk-sidebar-bg: var(--erp-sidebar);
+	--surface-sidebar: var(--erp-sidebar);
+	--subtle-accent: #f7f4ee;
+	--subtle-fg: #f7f4ee;
+	--control-bg: #f6f3ec;
+	--control-bg-on-gray: #efeae2;
+	--disabled-control-bg: #efeae2;
+	--text-color: var(--erp-ink);
+	--heading-color: var(--erp-ink);
+	--text-muted: var(--erp-muted);
+	--border-color: var(--erp-line);
+	--dark-border-color: var(--erp-line-strong);
+	--table-border-color: var(--erp-line);
+	--sidebar-select-color: var(--erp-accent-soft);
+	--highlight-color: var(--erp-accent-soft);
+	--input-disabled-bg: #efeae2;
+
+	--list-row-height: 36px;
+	--input-height: 32px;
+	--btn-height: 32px;
+	--radius: 8px;
+	--radius-md: 10px;
+	--radius-lg: 12px;
+
+	--focus-default: 0 0 0 2px rgba(29, 78, 92, 0.35);
+	--focus-outline-default: 2px solid var(--erp-accent);
+	--card-shadow: var(--erp-shadow);
+	--modal-shadow: 0 16px 48px rgba(28, 25, 21, 0.16);
+}
+
+[data-theme="dark"] {
+	--erp-canvas: #121418;
+	--erp-sidebar: #181b21;
+	--erp-card: #1c2028;
+	--erp-ink: #f4f1ea;
+	--erp-muted: #b0a89e;
+	--erp-line: #2c313b;
+	--erp-line-strong: #3a4150;
+	--erp-accent: #8ec8d6;
+	--erp-accent-soft: #1a3038;
+	--erp-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+	--bg-color: var(--erp-canvas);
+	--fg-color: var(--erp-card);
+	--card-bg: var(--erp-card);
+	--modal-bg: var(--erp-card);
+	--popover-bg: var(--erp-card);
+	--navbar-bg: var(--erp-sidebar);
+	--desk-sidebar-bg: var(--erp-sidebar);
+	--surface-sidebar: var(--erp-sidebar);
+	--text-color: var(--erp-ink);
+	--heading-color: var(--erp-ink);
+	--text-muted: var(--erp-muted);
+	--border-color: var(--erp-line);
+	--dark-border-color: var(--erp-line-strong);
+	--table-border-color: var(--erp-line);
+	--sidebar-select-color: var(--erp-accent-soft);
+	--highlight-color: var(--erp-accent-soft);
+	--control-bg: #222733;
+	--focus-default: 0 0 0 2px rgba(142, 200, 214, 0.45);
+	--card-shadow: var(--erp-shadow);
+}
+
+body {
+	color: var(--text-color);
+	letter-spacing: -0.011em;
+}
+
+h1,
+h2,
+h3,
+h4,
+.page-title .title-text,
+.form-section .section-head {
+	letter-spacing: -0.02em;
+}
+
+.navbar {
+	background: var(--navbar-bg);
+	border-bottom: 1px solid var(--border-color);
+}
+
+.search-bar {
+	border-radius: var(--radius-md);
+}
+
+.body-sidebar {
+	background: var(--desk-sidebar-bg);
+	border-right: 1px solid var(--border-color);
+}
+
+.active-sidebar,
+.standard-sidebar-item.selected,
+.sidebar-item.selected {
+	background: var(--sidebar-select-color);
+	border-radius: var(--radius);
+}
+
+.standard-sidebar-item:hover,
+.sidebar-item:hover {
+	border-radius: var(--radius);
+}
+
+.section-break {
+	letter-spacing: 0.01em;
+	font-size: 13px;
+}
+
+.page-head {
+	background: var(--fg-color);
+	border-bottom: 1px solid var(--border-color);
+}
+
+.page-title .title-text {
+	font-weight: 600;
+}
+
+.layout-main-section {
+	background: var(--fg-color);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--card-shadow);
+}
+
+.form-section.card-section,
+.form-dashboard-section,
+.form-links .form-link-card,
+.widget,
+.number-widget-box,
+.shortcut-widget-box,
+.links-widget-box {
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--card-shadow);
+}
+
+.form-section .section-head {
+	font-weight: 600;
+	color: var(--heading-color);
+}
+
+.frappe-control .form-control,
+.frappe-control .like-disabled-input,
+.awesomplete input,
+.form-control {
+	border-radius: var(--radius);
+	border-color: var(--border-color);
+	min-height: var(--input-height);
+}
+
+.frappe-control .like-disabled-input,
+.frappe-control .form-control:disabled,
+.frappe-control .form-control[readonly] {
+	background: var(--disabled-control-bg);
+	color: var(--text-muted);
+}
+
+.control-label {
+	color: var(--text-muted);
+	font-weight: 500;
+}
+
+.control-label.reqd::after,
+label.reqd::after {
+	color: var(--red-600);
+}
+
+.msgprint,
+.form-message,
+.invalid-feedback,
+.has-error .help-box {
+	border-radius: var(--radius);
+}
+
+.list-row-container {
+	border-color: var(--border-color);
+}
+
+.list-row-head {
+	color: var(--text-muted);
+	font-size: 12px;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+}
+
+.list-row-container:hover {
+	background: var(--highlight-color);
+}
+
+.list-row-container[data-selected="1"],
+.list-row-container.list-row-focus {
+	background: var(--sidebar-select-color);
+}
+
+.indicator-pill,
+.indicator {
+	border-radius: var(--radius-full);
+}
+
+.btn {
+	border-radius: var(--radius);
+	font-weight: 500;
+	transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:focus-visible,
+.form-control:focus-visible,
+.standard-sidebar-item:focus-visible,
+a:focus-visible,
+button:focus-visible {
+	outline: var(--focus-outline-default);
+	outline-offset: 2px;
+}
+
+.btn:disabled,
+.btn.disabled {
+	opacity: 0.55;
+}
+
+.modal-content {
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--modal-shadow);
+	background: var(--modal-bg);
+}
+
+.modal-header,
+.modal-footer {
+	border-color: var(--border-color);
+}
+
+.dt-scrollable,
+.datatable,
+.report-wrapper {
+	border-radius: var(--radius-md);
+}
+
+.datatable .dt-row {
+	border-color: var(--border-color);
+}
+
+.datatable .dt-header .dt-cell {
+	color: var(--text-muted);
+	font-size: 12px;
+	letter-spacing: 0.03em;
+}
+
+.widget-group .widget-group-head {
+	letter-spacing: -0.02em;
+}
+
+.empty-state,
+.msg-box,
+.no-result {
+	color: var(--text-muted);
+}
+
+.website-list,
+.web-form-wrapper,
+.page-card {
+	border-radius: var(--radius-lg);
+}
+
+/* Easier navigation: taller rows, a clear "you are here" mark, roomier forms. */
+.body-sidebar .standard-sidebar-item {
+	margin-bottom: 4px;
+}
+
+.body-sidebar .standard-sidebar-item .item-anchor {
+	height: 36px;
+	padding-left: 10px;
+	border-radius: var(--radius);
+}
+
+.body-sidebar .standard-sidebar-item .sidebar-item-label {
+	font-size: 14px;
+	line-height: 1.3;
+}
+
+.body-sidebar .standard-sidebar-item.active-sidebar .item-anchor,
+.body-sidebar .sidebar-item-container:has(> .nested-container.hidden .active-sidebar) > .standard-sidebar-item .item-anchor {
+	background: var(--erp-accent-soft);
+	color: var(--erp-accent);
+	font-weight: 600;
+	box-shadow: inset 3px 0 0 var(--erp-accent);
+}
+
+.body-sidebar .standard-sidebar-item:not(.active-sidebar) .item-anchor:hover {
+	background: var(--subtle-fg);
+}
+
+.page-head .page-title .title-text {
+	font-size: 20px;
+}
+
+.page-actions .btn,
+.page-head .btn {
+	min-height: 32px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+.form-tabs-list .nav-link,
+.form-tabs .nav-link {
+	padding: 8px 12px;
+	border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.form-layout .section-body {
+	padding-top: 4px;
+}
+
+.frappe-control {
+	margin-bottom: 2px;
+}
+
+.list-row,
+.list-row-head {
+	align-items: center;
+}
+
+.shortcut-widget-box,
+.links-widget-box,
+.number-widget-box {
+	min-height: 76px;
+}
+
+@media (max-width: 768px) {
+	.body-sidebar .standard-sidebar-item .item-anchor {
+		height: 44px;
+	}
+
+	.page-actions .btn,
+	.page-head .btn,
+	.btn {
+		min-height: 40px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.body-sidebar,
+	.body-sidebar > *,
+	.btn,
+	.widget,
+	.list-row-container,
+	.modal-content,
+	.standard-sidebar-item {
+		transition: none;
+		animation: none;
+	}
+}
